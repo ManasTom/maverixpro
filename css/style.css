@@ -54,6 +54,12 @@ html {
   position: relative;
 }
 
+.service-image img {
+  width: 85% !important;
+  padding: 5%;
+  padding-bottom: 0% !important;
+}
+
 @media (max-width: 768px) {
   .align-items-center {
     display: inherit;
@@ -1256,7 +1262,7 @@ textarea.form-control {
   background-color: #f8f8f8;
 }
 .testi-slider .swiper-slide {
-  text-align: start;
+  text-align: center;
   font-size: 18px;
   justify-content: center;
   align-items: center;
@@ -1650,3 +1656,60 @@ a.faq[data-bs-toggle=collapse]:before {
     max-width: 220% !important;
   }
 }/*# sourceMappingURL=style.css.map */
+
+.bg-video{
+  height:fit-content;
+  width:100%;
+}
+
+
+
+.video-container {
+  height: 500px;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+video {
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  height: 500px;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+
+
+.video-container:after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.callout {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  width: 70%;
+  margin: auto;
+}
+
+.banner-white{
+  color: #ffffff;
+}
