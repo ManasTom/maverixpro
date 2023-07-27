@@ -1713,3 +1713,12 @@ video {
 .banner-white{
   color: #ffffff;
 }
+
+.jd-left-allign-sub-h{
+  text-align: left;
+  font-weight: bold;
+}
+
+.jd-left-allign{
+  text-align: left;
+}
