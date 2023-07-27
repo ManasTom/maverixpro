@@ -30,6 +30,42 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navbar-navlist" data-bs-offset="71">
 
+    <script>
+        function isScreenWidthGreaterThan(size) {
+  return window.innerWidth >= size;
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const content1 = document.getElementById('c1');
+  const content2 = document.getElementById('c2');
+  content2.style.display = 'none';
+  content1.style.display = 'none';
+  if (isScreenWidthGreaterThan(768)) {
+    content1.style.display = 'block';
+  } else {
+    content2.style.display = 'block';
+  }
+});
+
+// Update the content on window resize (optional)
+window.addEventListener('resize', function() {
+  const content1 = document.getElementById('c1');
+  const content2 = document.getElementById('c2');
+   content2.style.display = 'none';
+  content1.style.display = 'none';
+  
+  if (isScreenWidthGreaterThan(768)) {
+    content1.style.display = 'block';
+    
+  } else {
+    content1.style.display = 'block';
+    
+  }
+});
+    </script>
+
     <!--Navbar Start-->
     <nav class="navbar navbar-expand-lg fixed-top sticky" id="navbar">
         <div class="container-fluid custom-container">
@@ -721,6 +757,272 @@
         })();
 
     </script>
+
+<button id = "c1" onclick="toggleChatBot()" >  <img src="bot.png" class="floating-button img"></button>
+<div class="chat-container" id="chatContainer" style="display: none;">
+  <div class="chat-log" id="chatLog">
+    <div class="bot-message">Hello! I am your Mavrixpro bot. How can I assist you today?</div>
+  </div>
+  <div class="user-input">
+    <input type="text" id="userInput" placeholder="Type your query...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+<style>
+  body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+position: relative; /* Important for positioning the floating chatbot */
+}
+.floating-button {
+ position: fixed;
+bottom: 20px;
+right: 20px;
+width: 200px; /* Set the desired width of the button */
+height: 100px; /* Set the desired height of the button */
+background-color: transparent;
+padding: 0;
+border: none;
+
+
+cursor: pointer;
+z-index: 9999;
+/* Set the image as the background of the button */
+background-image:"bot.png";
+
+
+
+/* Scale the image to cover the button */
+; /* Center the image within the button */
+
+
+
+}
+
+
+
+/* Styles for the floating chatbot container */
+.chat-container {
+position: fixed;
+bottom: 20px; /* Adjust to position the chatbot vertically */
+right: 20px; /* Adjust to position the chatbot horizontally */
+max-width: 40px;
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow effect */
+z-index: 9999; /* Optional: Ensure the chatbot appears above other elements */
+position: fixed;
+bottom: 110px; /* Adjust as needed to position the chatbot container above the button */
+right: 100px; /* Adjust as needed to align the chatbot container with the button */
+max-width: 300px;
+/* ... (other chat container styles) ... */
+z-index: 10000;
+
+}
+
+/* Rest of the CSS remains unchanged */
+.chat-log {
+/* ... */
+}
+
+.bot-message {
+/* ... */
+}
+
+.user-input {
+/* ... */
+}
+
+.user-input input[type="text"] {
+/* ... */
+}
+
+.user-input button {
+/* ... */
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-container {
+  max-width:  300px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.chat-log {
+  max-height: 150px;
+  overflow-y: scroll;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.bot-message {
+  background-color: #f1f1f1;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.user-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+.user-input input[type="text"] {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+.user-input button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+</style>
+<script>
+  
+
+const chatLog = document.getElementById('chatLog');
+  const userInput = document.getElementById('userInput');
+  
+  function addBotMessage(message) {
+    const botMessage = document.createElement('div');
+    botMessage.classList.add('bot-message');
+    botMessage.innerText = message;
+    chatLog.appendChild(botMessage);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+  
+  function sendMessage() {
+    const userMessage = userInput.value.trim();
+    if (userMessage === '') return;
+  
+    // Clear the user input
+    userInput.value = '';
+  
+    // Add the user message to the chat log
+    const userMessageElement = document.createElement('div');
+    userMessageElement.innerText = userMessage;
+    chatLog.appendChild(userMessageElement);
+  
+    // Respond to user message
+    respondToUserMessage(userMessage);
+  }
+  var conform=false;
+  function respondToUserMessage(userMessage) {
+    // Simple predefined responses based on user input
+    let response;
+    if (userMessage.toLowerCase().includes('hello')) {
+      response = 'Hello there! How can I help you?';
+    } else if (userMessage.toLowerCase().includes('how are you')) {
+      response = 'I am just a chatbot, but thanks for asking!';
+    } else if (userMessage.toLowerCase().includes('bye')) {
+      response = 'Goodbye! Have a great day!';
+    } 
+    else if (userMessage.toLowerCase().includes('yes') && conform==true) {
+     window.location.href = 'https://wa.me/+91';
+    }
+     
+ else {
+      response = 'I didn\'t quite get that. Can you please be more specific or contact our custumer care \n type yes to continue';
+      conform=true;
+    }
+  
+    // Simulate bot typing delay (optional)
+    setTimeout(() => {
+      addBotMessage(response);
+    }, 500);
+  }
+  
+  // Event listener for Enter key press in the input field
+  userInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      sendMessage();
+    }
+  });
+  function toggleChatBot() {
+const chatContainer = document.getElementById('chatContainer');
+chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
+}
+  </script>
+
+
+<div class="floating_btn" id="c2">
+<a target="_blank" href="https://wa.me/+917907977521">
+<div class="contact_icon">
+ <i class="fa fa-whatsapp my-float"></i>
+</div>
+</a>
+<p class="text_icon">Talk to us?</p>
+</div>
+
+<style>
+
+.floating_btn {
+position: fixed;
+bottom: 30px;
+right: 30px;
+width: 100px;
+height: 100px;
+display: flex;
+flex-direction: column;
+align-items:center;
+justify-content:center;
+z-index: 1000;
+}
+
+@keyframes pulsing {
+to {
+box-shadow: 0 0 0 30px rgba(232, 76, 61, 0);
+}
+}
+
+.contact_icon {
+background-color: #42db87;
+color: #fff;
+width: 60px;
+height: 60px;
+font-size:30px;
+border-radius: 50px;
+text-align: center;
+box-shadow: 2px 2px 3px #999;
+display: flex;
+align-items: center;
+justify-content: center;
+transform: translatey(0px);
+animation: pulse 1.5s infinite;
+box-shadow: 0 0 0 0 #42db87;
+-webkit-animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+-moz-animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+-ms-animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+font-weight: normal;
+font-family: sans-serif;
+text-decoration: none !important;
+transition: all 300ms ease-in-out;
+}
+
+
+.text_icon {
+margin-top: 8px;
+color: #707070;
+font-size: 13px;
+}
+</style>
 
 </body>
 
